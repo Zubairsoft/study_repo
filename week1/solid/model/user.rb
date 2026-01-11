@@ -1,3 +1,6 @@
+require_relative '../notifications/email'
+require_relative '../notifications/sms'
+
 module Model
   class User  
     attr_reader :name, :email, :phone
@@ -8,20 +11,10 @@ module Model
       @phone = phone
     end
 
-    def notify
-      send_email if email
-      send_sms if phone
+    def send_notification
+      Notification::Email.new(self).notify
+      Notification::Sms.new(self).notify
     end
 
-    private
-
-      def send_email
-        puts "Sending email to #{email}"
-      end
-
-      def send_sms
-        puts "Sending sms to #{phone}"
-      end
   end
 end
-

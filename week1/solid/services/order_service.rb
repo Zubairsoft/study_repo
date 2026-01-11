@@ -5,7 +5,7 @@ module Services
 
       total = discount_type.apply(total)
 
-      user.notify
+      user.send_notification
 
       puts "Saving order with total #{total}"
 
